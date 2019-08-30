@@ -1,0 +1,10 @@
+#flex-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+img {
+    margin: 10px;
+    width: 30%;
+    background-color: red;
+}

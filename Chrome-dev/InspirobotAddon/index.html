@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base target="_top">
+    <style>
+        html,
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 16px;
+            color: #428528;
+            background-color: #0e0e0e;
+            text-align: center;
+        }
+
+        .flexContainer {
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1 {
+            display: flex;
+            margin-right: auto;
+            margin-left: auto;
+            min-width: 60%;
+
+        }
+
+        img {
+            display: flex;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 25px;
+            /* width: 100%; */
+        }
+
+        button {
+            background-color: #1f3317;
+            color: #ffffff;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 20px;
+            font-weight: bold;
+            border: 4px solid black;
+            width: auto;
+            margin-top: 10px;
+            margin-left: 25%;
+            margin-right: 25%;
+            height: 70px;
+        }
+
+        .quoteImg {
+            height: auto;
+            /*   width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            top: 20%;
+            z-index: 5; */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flexContainer">
+        <h1 class="my-title">Generate an inspirobot quote for your slide! </h1>
+        <img id="logo" src="http://inspirobot.me/website/images/inspirobot-dark-green.png" alt="inspirobot logo" />
+        <button onClick="generateQuote()">Generate </button>
+        <button onClick="saveImg()">Choose</button>
+
+    </div>
+
+</body>
+<script>
+
+    function generateQuote() {
+        const request = new Request('https://inspirobot.me/api?generate=true&oy=vey')
+        fetch(request)
+            .then(function (response) {
+                response.text().then(function (text) {
+                    var quote = document.getElementById('logo');
+                    quote.classList.add("quoteImg")
+                    quote.src = text;
+
+                    return;
+                })
+            })
+            .catch(function (error) {
+                console.log(error);
+                return error;
+            });
+    }
+
+    function saveImg() {
+        var quote = document.getElementById('logo');
+        google.script.run.changeBackground(quote.src);
+    }
+
+</script>
+
+</html>
